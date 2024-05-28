@@ -10,3 +10,38 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
+body{
+    margin-top: 100px;
+}
+ul{
+    padding: 0;
+    margin-bottom: 0;
+}
+ul li{
+    border: 1px solid grey;
+    list-style: none;
+    padding: 5px;
+}
+#newname{
+    list-style: none;
+    padding: 5px;
+    color: rgb(8, 6, 179);
+}
+
+h1{
+    text-align: center;
+    color:red;  
+}
+input{
+    border: none;
+    width: 100%;
+
+}
+button{
+    margin-top: 20px;
+    
+}
+#cantidad{
+    margin-top: 10px;
+    color: rgb(8, 6, 179);
+}
