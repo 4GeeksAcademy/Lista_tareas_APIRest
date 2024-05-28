@@ -90,12 +90,9 @@ const TodoApi = () => {
 	}
 
 	useEffect(() => {
-		//setTimeout(() => {
 		if (newName != "") {
 			getTareas()
 		}
-		//}, 2000)
-
 	}, []
 	)
 
