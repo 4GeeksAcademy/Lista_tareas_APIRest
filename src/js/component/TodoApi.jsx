@@ -10,6 +10,7 @@ const TodoApi = () => {
 	const [newName, setNewName] = useState("");
 	const [hidden, setHidden] = useState(true);
 
+
 	const creaUsuario = async () => {
 		try {
 			const respuesta = await fetch(`https://playground.4geeks.com/todo/users/${newName}`, {
@@ -20,7 +21,6 @@ const TodoApi = () => {
 				if (detail == "User already exists.") {
 					console.log(detail);
 					getTareas();
-
 				}
 			}
 		} catch (error) {
@@ -49,12 +49,23 @@ const TodoApi = () => {
 		}
 	}
 
+	const deleteUsuario = async () => {
+		try {
+			const response = await fetch(`https://playground.4geeks.com/todo/users/${newName}`, {
+				method: "DELETE"
+			})
+			window.location.replace('');
+		}
+		catch (error) {
+			console.log(error)
+		}
+	}
+
 	const deleteTareas = async (itemId) => {
 		try {
 			const response = await fetch(`https://playground.4geeks.com/todo/todos/${itemId}`, {
-				method: "DELETE",
+				method: "DELETE"
 			})
-			getTareas();
 		}
 		catch (error) {
 			console.log(error)
@@ -74,7 +85,7 @@ const TodoApi = () => {
 			setTodos(data.todos);
 			console.log("ESTO DEVUELVE TODOS: ", todos);
 		} catch (error) {
-			console.log("error");
+			console.log(error);
 		}
 
 	}
@@ -84,8 +95,8 @@ const TodoApi = () => {
 		getTareas();
 		setInputvalue("");
 	}
-	async function handleDelete(id) {
-		await deleteTareas(id);
+	async function handleDelete(itemId) {
+		await deleteTareas(itemId);
 		getTareas();
 	}
 
@@ -128,11 +139,15 @@ const TodoApi = () => {
 						onChange={(e) => setInputvalue(e.target.value)}
 						value={inputValue}
 						onKeyDown={(e) => {
-
-							if ((inputValue != "")) {
-								if (e.key == "Enter") {
-									handlePost();
+							if (newName != "") {
+								if ((inputValue != "")) {
+									if (e.key == "Enter") {
+										handlePost();
+									}
 								}
+							}
+							else {
+								console.log("Es necesario Digitar el Nombre")
 							}
 						}
 
@@ -161,10 +176,7 @@ const TodoApi = () => {
 			</ul>
 			<div id="cantidad">{todos.length}   {todos.length === 0 ? "Lista vacia, agrega una tarea" : "Tareas"}</div>
 
-			<button id="boton" className="btn btn-success btn-lg" onClick={() => todos.map((item, index) => (
-				deleteTareas(item.id)
-			))
-			}
+			<button id="boton" className="btn btn-success btn-lg" onClick={() => deleteUsuario()}
 			>
 				Eliminar todo
 			</button>
